@@ -1,0 +1,52 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        double side1 = GetSide("першої");
+        double side2 = GetSide("другої");
+        double side3 = GetSide("третьої");
+
+        if (IsTriangleValid(side1, side2, side3))
+        {
+            double perimeter = side1 + side2 + side3;
+            double s = perimeter / 2;
+            double area = Math.Sqrt(s * (s - side1) * (s - side2) * (s - side3));
+            Console.WriteLine($"Периметр трикутника: {perimeter}");
+            Console.WriteLine($"Площа трикутника: {area}");
+            Console.WriteLine($"Трикутник є {GetTriangleType(side1, side2, side3)}.");
+        }
+        else
+        {
+            Console.WriteLine("Трикутник із введеними сторонами не існує.");
+        }
+        Console.ReadKey();
+    }
+
+    static double GetSide(string sideName)
+    {
+        double side;
+        do
+        {
+            Console.Write($"Введіть довжину {sideName} сторони: ");
+        } while (!double.TryParse(Console.ReadLine(), out side) || side <= 0);
+
+        return side;
+    }
+
+    static bool IsTriangleValid(double a, double b, double c)
+    {
+        return a + b > c && a + c > b && b + c > a;
+    }
+
+    static string GetTriangleType(double a, double b, double c)
+    {
+        if (a == b && b == c)
+            return "рівносторонній";
+        else if (a == b || b == c || a == c)
+            return "рівнобедрений";
+        else
+            return "різносторонній";
+    }
+}
