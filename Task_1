@@ -1,0 +1,30 @@
+using System;
+
+namespace IntervalSelection
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] numbers = new int[3];
+
+            Console.WriteLine("Введіть три цілих числа:");
+            for (int i = 0; i < numbers.Length; i++)
+                numbers[i] = Convert.ToInt32(Console.ReadLine());
+
+            int lastDigit = 2;
+            int lowerBound = 1;
+            int upperBound = 10 + lastDigit;
+
+            Console.WriteLine($"Числа, які належать до інтервалу [{lowerBound}, {upperBound}]:");
+            foreach (int num in numbers)
+            {
+                if (num >= lowerBound && num <= upperBound)
+                    Console.WriteLine(num);
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
+
