@@ -1,0 +1,58 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int[] array = GenerateArray(30, -50, 50);
+        int M = GetNumber("Введіть число M: ");
+        
+        Console.WriteLine("Масив Х:");
+        PrintArray(array);
+        
+        Console.WriteLine($"Число M: {M}"); 
+        Console.WriteLine($"Масив Y (елементи більше за {M} за модулем):");
+        PrintFilteredArray(array, M);
+
+        Console.ReadKey();
+    }
+
+    static int[] GenerateArray(int size, int minValue, int maxValue)
+    {
+        int[] array = new int[size];
+        Random random = new Random();
+
+        for (int i = 0; i < size; i++)
+            array[i] = random.Next(minValue, maxValue + 1);
+
+        return array;
+    }
+
+    static int GetNumber(string message)
+    {
+        int number;
+        do
+        {
+            Console.Write(message);
+        } while (!int.TryParse(Console.ReadLine(), out number));
+        
+        return number;
+    }
+
+    static void PrintArray(int[] array)
+    {
+        foreach (var element in array)
+            Console.Write($"{element} ");
+        Console.WriteLine();
+    }
+
+    static void PrintFilteredArray(int[] array, int M)
+    {
+        foreach (var element in array)
+        {
+            if (Math.Abs(element) > M)
+                Console.Write($"{element} ");
+        }
+        Console.WriteLine();
+    }
+}
